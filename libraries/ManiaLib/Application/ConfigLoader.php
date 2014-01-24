@@ -14,15 +14,14 @@ namespace ManiaLib\Application;
 
 use ManiaLib\Cache\Cache;
 
-abstract class ConfigLoader
+class ConfigLoader extends \ManiaLib\Utils\Singleton
 {
-
-	protected static $INIConfigFilename;
-	protected static $INIConfigDirectory;
-	protected static $PHPConfigFilename;
-	protected static $hostname;
-	protected static $enableCache = true;
-	protected static $aliases = array(
+	protected $INIConfigFilename;
+	protected $INIConfigDirectory;
+	protected $PHPConfigFilename;
+	protected $hostname;
+	protected $enableCache = true;
+	protected $aliases = array(
 		'application' => 'ManiaLib\Application\Config',
 		'database' => 'ManiaLib\Database\Config',
 		'log' => 'ManiaLib\Utils\LoggerConfig',
@@ -30,96 +29,96 @@ abstract class ConfigLoader
 		'webservices' => 'ManiaLib\WebServices\Config',
 	);
 
-	static function setINIConfigFilename($filename)
+	function setINIConfigFilename($filename)
 	{
-		self::$INIConfigFilename = $filename;
+		$this->INIConfigFilename = $filename;
 	}
 
-	static function getINIConfigFilename()
+	function getINIConfigFilename()
 	{
-		if(!self::$INIConfigFilename)
+		if(!$this->INIConfigFilename)
 		{
-			self::$INIConfigFilename = MANIALIB_APP_PATH.'config/app.ini';
+			$this->INIConfigFilename = MANIALIB_APP_PATH.'config/app.ini';
 		}
-		return self::$INIConfigFilename;
+		return $this->INIConfigFilename;
 	}
 	
-	static function getINIConfigDirectory()
+	function getINIConfigDirectory()
 	{
-		if(!self::$INIConfigDirectory)
+		if(!$this->INIConfigDirectory)
 		{
-			self::$INIConfigDirectory = MANIALIB_APP_PATH.'config/app.d/';
+			$this->INIConfigDirectory = MANIALIB_APP_PATH.'config/app.d/';
 		}
-		return self::$INIConfigDirectory;
+		return $this->INIConfigDirectory;
 	}
 
-	static function getPHPConfigFilename()
+	function getPHPConfigFilename()
 	{
-		if(!self::$PHPConfigFilename)
+		if(!$this->PHPConfigFilename)
 		{
-			self::$PHPConfigFilename = MANIALIB_APP_PATH.'config/app.php';
+			$this->PHPConfigFilename = MANIALIB_APP_PATH.'config/app.php';
 		}
-		return self::$PHPConfigFilename;
+		return $this->PHPConfigFilename;
 	}
 
-	static function setHostname($hostname)
+	function setHostname($hostname)
 	{
-		self::$hostname = $hostname;
+		$this->hostname = $hostname;
 	}
 
-	static function getHostname()
+	function getHostname()
 	{
-		if(!self::$hostname)
+		if(!$this->hostname)
 		{
-			self::$hostname = \ManiaLib\Utils\Arrays::get($_SERVER, 'HTTP_HOST');
+			$this->hostname = \ManiaLib\Utils\Arrays::get($_SERVER, 'HTTP_HOST');
 		}
-		return self::$hostname;
+		return $this->hostname;
 	}
 
-	static function disableCache()
+	function disableCache()
 	{
-		self::$enableCache = false;
+		$this->enableCache = false;
 	}
 
-	static function load()
+	function load()
 	{
-		if(file_exists(self::getPHPConfigFilename()))
+		if(file_exists($this->getPHPConfigFilename()))
 		{
-			require_once self::getPHPConfigFilename();
+			require_once $this->getPHPConfigFilename();
 		}
 		else
 		{
 			$key = Cache::getPrefix().get_called_class();
-			$cache = Cache::factory(self::$enableCache ? \ManiaLib\Cache\APC : \ManiaLib\Cache\NONE);
+			$cache = Cache::factory($this->enableCache ? \ManiaLib\Cache\APC : \ManiaLib\Cache\NONE);
 
 			$values = $cache->fetch($key);
 			if($values === false)
 			{
-				$values = self::loadFile(self::getINIConfigFilename());
-				if (is_dir(self::getINIConfigDirectory()))
+				$values = $this->loadFile($this->getINIConfigFilename());
+				if (is_dir($this->getINIConfigDirectory()))
 				{
-					foreach(glob(self::getINIConfigDirectory().'*.ini') as $filename)
+					foreach(glob($this->getINIConfigDirectory().'*.ini') as $filename)
 					{
-						$values = array_merge($values, self::loadFile($filename));
+						$values = array_merge($values, $this->loadFile($filename));
 					}
 				}
 				$cache->add($key, $values);
 			}
-			self::arrayToSingletons($values);
+			$this->arrayToSingletons($values);
 		}
 	}
 	
-	protected static function loadFile($filename)
+	protected function loadFile($filename)
 	{
 		$values = parse_ini_file($filename, true);
-		list($values, $overrides) = self::scanOverrides($values);
-		$values = self::processOverrides($values, $overrides);
-		$values = self::loadAliases($values);
-		$values = self::replaceAliases($values);
+		list($values, $overrides) = $this->scanOverrides($values);
+		$values = $this->processOverrides($values, $overrides);
+		$values = $this->loadAliases($values);
+		$values = $this->replaceAliases($values);
 		return $values;
 	}
 
-	protected static function loadAliases(array $values)
+	protected function loadAliases(array $values)
 	{
 		foreach($values as $key => $value)
 		{
@@ -127,7 +126,7 @@ abstract class ConfigLoader
 			{
 				if(isset($matches[1]))
 				{
-					self::$aliases[$matches[1]] = $value;
+					$this->aliases[$matches[1]] = $value;
 					unset($values[$key]);
 				}
 			}
@@ -135,7 +134,7 @@ abstract class ConfigLoader
 		return $values;
 	}
 
-	protected static function replaceAliases(array $values)
+	protected function replaceAliases(array $values)
 	{
 		$newValues = array();
 		foreach($values as $key => $value)
@@ -145,9 +144,9 @@ abstract class ConfigLoader
 			{
 				$className = reset($callback);
 				$propertyName = end($callback);
-				if(isset(self::$aliases[$className]))
+				if(isset($this->aliases[$className]))
 				{
-					$className = self::$aliases[$className];
+					$className = $this->aliases[$className];
 				}
 				$newValues[$className.'.'.$propertyName] = $value;
 			}
@@ -159,7 +158,7 @@ abstract class ConfigLoader
 		return $newValues;
 	}
 
-	protected static function scanOverrides(array $array)
+	protected function scanOverrides(array $array)
 	{
 		$values = array();
 		$overrides = array();
@@ -178,16 +177,16 @@ abstract class ConfigLoader
 		return array($values, $overrides);
 	}
 
-	protected static function processOverrides(array $values, array $overrides)
+	protected function processOverrides(array $values, array $overrides)
 	{
 		foreach($overrides as $key => $override)
 		{
 			$matches = null;
 			if(preg_match('/^hostname: (.+)$/iu', $key, $matches))
 			{
-				if($matches[1] == self::getHostname())
+				if($matches[1] == $this->getHostname())
 				{
-					$values = self::overrideArray($values, $override);
+					$values = $this->overrideArray($values, $override);
 					break;
 				}
 			}
@@ -195,7 +194,7 @@ abstract class ConfigLoader
 		return $values;
 	}
 
-	protected static function overrideArray(array $source, array $override)
+	protected function overrideArray(array $source, array $override)
 	{
 		foreach($override as $key => $value)
 		{
@@ -204,9 +203,8 @@ abstract class ConfigLoader
 		return $source;
 	}
 
-	protected static function arrayToSingletons($values)
+	protected function arrayToSingletons($values)
 	{
-		$instances = array();
 		foreach($values as $key => $value)
 		{
 			$callback = explode('.', $key, 2);
