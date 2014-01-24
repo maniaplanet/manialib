@@ -28,11 +28,6 @@ We use [Composer](https://getcomposer.org/), because we're cool:
 }
 ```
 
-Getting started
----------------
-
-Todo. Sorry ;)
-
 Useful links
 ------------
 
