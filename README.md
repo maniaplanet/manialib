@@ -1,4 +1,4 @@
-ManiaLib - Lightweight PHP framework for Manialinks
+ManiaLib framework
 ===================================================
 
 [![Latest Stable Version](https://poser.pugx.org/maniaplanet/manialib/v/stable.png)](https://packagist.org/packages/maniaplanet/manialib)
@@ -10,8 +10,30 @@ Manialink (and Web) tasks.
 
 The library is released under the GNU LESSER GENERAL PUBLIC LICENSE Version 3.
 
+This is the framework package
+-----------------------------
+
+This project is the framework package only. It is made to be used in other projects. If you want the full-stacked application with a demo to start building your own Manialink, check out https://github.com/maniaplanet/manialib-application-template
+
+Installation
+-----------------------------
+
+We use [Composer](https://getcomposer.org/), because we're cool:
+
+```
+{
+	"require": {
+        "maniaplanet/manialib": "~3.1"
+    }
+}
+```
+
+Getting started
+---------------
+
+Todo. Sorry ;)
+
 Useful links
 ------------
 
-* Google Code project: http://code.google.com/p/manialib/
 * Support forum: http://forum.maniaplanet.com/viewforum.php?f=40
