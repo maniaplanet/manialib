@@ -79,8 +79,13 @@ class ConfigLoader extends \ManiaLib\Utils\Singleton
 	{
 		$this->enableCache = false;
 	}
+	
+	static function load()
+	{
+		static::getInstance()->run();
+	}
 
-	function load()
+	function run()
 	{
 		if(file_exists($this->getPHPConfigFilename()))
 		{
