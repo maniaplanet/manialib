@@ -27,6 +27,7 @@ class ConfigLoader extends \ManiaLib\Utils\Singleton
 		'log' => 'ManiaLib\Utils\LoggerConfig',
 		'tracking' => 'ManiaLib\Application\Tracking\Config',
 		'webservices' => 'ManiaLib\WebServices\Config',
+		'path' => 'ManiaLib\Utils\Path'
 	);
 
 	function setINIConfigFilename($filename)
