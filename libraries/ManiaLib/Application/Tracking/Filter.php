@@ -53,7 +53,16 @@ class Filter implements \ManiaLib\Application\Filterable
 		$response = \ManiaLib\Application\Response::getInstance();
 		if($this->account)
 		{
-			$response->trackingURL = $this->tracker->getTrackingURL();
+			$trackingURL = $response->get('trackingURL');
+			if ($trackingURL)
+			{
+				$trackingURL[] = $this->tracker->getTrackingURL();
+				$response->trackingURL = $trackingURL;
+			}
+			else
+			{
+				$response->trackingURL = array($this->tracker->getTrackingURL());
+			}
 		}
 		$response->registerView('\ManiaLib\Application\Tracking\View');
 	}
