@@ -25,7 +25,7 @@ class View extends \ManiaLib\Application\View
 	{
 		if (!static::$rendered)
 		{
-			foreach($this->response->trackingURL as $url)
+			foreach((array) $this->response->trackingURL as $url)
 			{
 				$ui = new Quad(0.1, 0.1);
 				$ui->setPosition(400, 300);
