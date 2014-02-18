@@ -17,7 +17,7 @@ class Path extends Singleton
 	{
 		if ($external && \Phar::running(false) != "")
 			return dirname(\Phar::running(false));
-		if (!$this->root && !defined(MANIALIB_APP_PATH))
+		if (!$this->root && !defined('MANIALIB_APP_PATH'))
 			throw new \Exception();
 		return $this->root ? : MANIALIB_APP_PATH;
 	}
