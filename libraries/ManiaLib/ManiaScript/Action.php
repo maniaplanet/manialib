@@ -38,6 +38,8 @@ abstract class Action
 	const set_text = 'set_text';
 	const set_entry_value = 'set_entry_value';
 	const set_image = 'set_image';
+	const set_style = 'set_style';
+	const set_substyle = 'set_substyle';
 	const disable_links = 'disable_links';
 	const enable_links = 'enable_links';
 	const set_clublink = 'set_clublink';

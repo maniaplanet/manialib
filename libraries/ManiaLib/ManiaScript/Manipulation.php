@@ -118,6 +118,24 @@ abstract class Manipulation
 		$script = sprintf($script, $controlId, $URL);
 		Manialink::appendScript($script);
 	}
+	
+	static function setStyle($controlId, $style)
+	{
+		$script = 'manialib_set_style("%s", "%s"); ';
+		$controlId = Tools::escapeString($controlId);
+		$style = Tools::escapeString($style);
+		$script = sprintf($script, $controlId, $style);
+		Manialink::appendScript($script);
+	}
+	
+	static function setSubstyle($controlId, $substyle)
+	{
+		$script = 'manialib_set_substyle("%s", "%s"); ';
+		$controlId = Tools::escapeString($controlId);
+		$substyle = Tools::escapeString($substyle);
+		$script = sprintf($script, $controlId, $substyle);
+		Manialink::appendScript($script);
+	}
 
 	static function disableLinks()
 	{
