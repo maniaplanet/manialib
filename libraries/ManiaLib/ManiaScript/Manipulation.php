@@ -22,10 +22,15 @@ abstract class Manipulation
 
 	static function hide($controlId)
 	{
+		Manialink::appendScript(self::getHide($controlId));
+	}
+	
+	static function getHide($controlId)
+	{
 		$script = 'manialib_hide("%s"); ';
 		$controlId = Tools::escapeString($controlId);
 		$script = sprintf($script, $controlId);
-		Manialink::appendScript($script);
+		return $script;
 	}
 
 	static function show($controlId)

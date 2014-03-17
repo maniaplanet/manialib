@@ -26,11 +26,16 @@ abstract class Event
 
 	static function addListener($controlId, $eventType, array $action)
 	{
+		Manialink::appendScript(self::getListener($controlId, $eventType, $action));
+	}
+	
+	static function getListener($controlId, $eventType, array $action)
+	{
 		$script = 'manialib_event_add_listener("%s", %s, %s); ';
 		$controlId = Tools::escapeString($controlId);
 		$action = Tools::array2maniascript($action);
 		$script = sprintf($script, $controlId, $eventType, $action);
-		Manialink::appendScript($script);
+		return $script;
 	}
 
 }
