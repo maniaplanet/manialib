@@ -20,6 +20,15 @@ use ManiaLib\Gui\Manialink;
 abstract class UI
 {
 
+	static function getDialog($openControlId, $message, array $action = array())
+	{
+		$script = 'manialib_ui_dialog("%s", "%s", %s); ';
+		$openControlId = Tools::escapeString($openControlId);
+		$message = Tools::escapeString($message);
+		$action = Tools::array2maniascript($action);
+		return sprintf($script, $openControlId, $message, $action);
+	}
+
 	/**
 	 * Teh infamous dialog box
 	 *
@@ -29,12 +38,15 @@ abstract class UI
 	 */
 	static function dialog($openControlId, $message, array $action = array())
 	{
-		$script = 'manialib_ui_dialog("%s", "%s", %s); ';
+		Manialink::appendScript(static::getDialog($openControlId, $message, $action));
+	}
+
+	static function getMessage($openControlId, $message)
+	{
+		$script = 'manialib_ui_message("%s", "%s"); ';
 		$openControlId = Tools::escapeString($openControlId);
 		$message = Tools::escapeString($message);
-		$action = Tools::array2maniascript($action);
-		$script = sprintf($script, $openControlId, $message, $action);
-		Manialink::appendScript($script);
+		return sprintf($script, $openControlId, $message);
 	}
 
 	/**
@@ -46,11 +58,16 @@ abstract class UI
 	 */
 	static function message($openControlId, $message)
 	{
-		$script = 'manialib_ui_message("%s", "%s"); ';
-		$openControlId = Tools::escapeString($openControlId);
+
+		Manialink::appendScript(static::getMessage($openControlId, $message));
+	}
+
+	static function getTooltip($controlId, $message)
+	{
+		$script = 'manialib_ui_tooltip("%s", "%s"); ';
+		$controlId = Tools::escapeString($controlId);
 		$message = Tools::escapeString($message);
-		$script = sprintf($script, $openControlId, $message);
-		Manialink::appendScript($script);
+		return sprintf($script, $controlId, $message);
 	}
 
 	/**
@@ -61,30 +78,32 @@ abstract class UI
 	 */
 	static function tooltip($controlId, $message)
 	{
-		$script = 'manialib_ui_tooltip("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$message = Tools::escapeString($message);
-		$script = sprintf($script, $controlId, $message);
-		Manialink::appendScript($script);
+		Manialink::appendScript(static::getTooltip($controlId, $message));
 	}
 
-	static function datePicker($entryId, $openControlId)
+	static function getDatePicker($entryId, $openControlId)
 	{
 		$script = 'manialib_ui_datepicker_init("%s", "%s");';
 		$entryId = Tools::escapeString($entryId);
 		$openControlId = Tools::escapeString($openControlId);
-		$script = sprintf($script, $entryId, $openControlId);
-		Manialink::appendScript($script);
+		return sprintf($script, $entryId, $openControlId);
+	}
+
+	static function datePicker($entryId, $openControlId)
+	{
+		Manialink::appendScript(static::getDatePicker($entryId, $openControlId));
+	}
+
+	static function getMagnifier($imageId, $scale)
+	{
+		$script = 'manialib_ui_magnifier("%s", "%f"); ';
+		$controlId = Tools::escapeString($imageId);
+		return sprintf($script, $controlId, $scale);
 	}
 
 	static function magnifier($imageId, $scale)
 	{
-		$script = 'manialib_ui_magnifier("%s", "%f"); ';
-		$controlId = Tools::escapeString($imageId);
-		$script = sprintf($script, $imageId, $scale);
-		Manialink::appendScript($script);
+		Manialink::appendScript(static::getMagnifier($imageId, $scale));
 	}
 
 }
-
-?>
