@@ -17,6 +17,7 @@ abstract class Bootstrapper
 
 	static $errorReporting = E_ALL;
 	static $errorHandlingClass = '\ManiaLib\Application\ErrorHandling';
+	static $errorHandlingCallback = '\ManiaLib\Application\ErrorHandling::exceptionHandler';
 	static $errorHandler = 'exceptionErrorHandler';
 	static $fatalExceptionHandler = 'fatalExceptionHandler';
 
