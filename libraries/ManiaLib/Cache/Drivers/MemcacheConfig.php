@@ -15,6 +15,6 @@ namespace ManiaLib\Cache\Drivers;
 class MemcacheConfig extends \ManiaLib\Utils\Singleton
 {
 	// Memcahed is really simple for now...
-	public $hosts = array('127.0.0.1');
+	public $hosts = array();
 }
 ?>

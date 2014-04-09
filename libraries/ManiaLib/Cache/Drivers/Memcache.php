@@ -39,7 +39,7 @@ class Memcache implements \ManiaLib\Cache\CacheInterface
 
 		$params = new MemcacheConnectionParams();
 		$params->id = 'default';
-		$params->hosts = $config->hosts;
+		$params->hosts = $config->hosts ? : array('127.0.0.1');
 
 		return static::factory($params);
 	}
