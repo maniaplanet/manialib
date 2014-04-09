@@ -1,7 +1,7 @@
 <?php
 /**
  * ManiaLib - Lightweight PHP framework for Manialinks
- * 
+ *
  * @see         http://code.google.com/p/manialib/
  * @copyright   Copyright (c) 2009-2011 NADEO (http://www.nadeo.com)
  * @license     http://www.gnu.org/licenses/lgpl.html LGPL License 3
@@ -24,7 +24,7 @@ abstract class Manipulation
 	{
 		Manialink::appendScript(self::getHide($controlId));
 	}
-	
+
 	static function getHide($controlId)
 	{
 		$script = 'manialib_hide("%s"); ';
@@ -35,18 +35,28 @@ abstract class Manipulation
 
 	static function show($controlId)
 	{
+		Manialink::appendScript(self::getShow($controlId));
+	}
+
+	static function getShow($controlId)
+	{
 		$script = 'manialib_show("%s"); ';
 		$controlId = Tools::escapeString($controlId);
 		$script = sprintf($script, $controlId);
-		Manialink::appendScript($script);
+		return $script;
 	}
 
 	static function toggle($controlId)
 	{
+		Manialink::appendScript(self::getToggle($controlId));
+	}
+
+	static function getToggle($controlId)
+	{
 		$script = 'manialib_toggle("%s"); ';
 		$controlId = Tools::escapeString($controlId);
 		$script = sprintf($script, $controlId);
-		Manialink::appendScript($script);
+		return $script;
 	}
 
 	static function absolutePosx($controlId, $posx)
@@ -123,7 +133,7 @@ abstract class Manipulation
 		$script = sprintf($script, $controlId, $URL);
 		Manialink::appendScript($script);
 	}
-	
+
 	static function setStyle($controlId, $style)
 	{
 		$script = 'manialib_set_style("%s", "%s"); ';
@@ -132,7 +142,7 @@ abstract class Manipulation
 		$script = sprintf($script, $controlId, $style);
 		Manialink::appendScript($script);
 	}
-	
+
 	static function setSubstyle($controlId, $substyle)
 	{
 		$script = 'manialib_set_substyle("%s", "%s"); ';
