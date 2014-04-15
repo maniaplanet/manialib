@@ -23,6 +23,7 @@ abstract class Event
 	const mouseOver = 'CMlEvent::Type::MouseOver';
 	const mouseOut = 'CMlEvent::Type::MouseOut';
 	const keyPress = 'CMlEvent::Type::KeyPress';
+	const entrySubmit = 'CMlEvent::Type::EntrySubmit';
 
 	static function addListener($controlId, $eventType, array $action)
 	{
