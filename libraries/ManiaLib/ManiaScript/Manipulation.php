@@ -116,6 +116,19 @@ abstract class Manipulation
 		Manialink::appendScript($script);
 	}
 
+	static function getSetTextColor($controlId, $textColor)
+	{
+		$script = 'manialib_set_text("%s", "%s"); ';
+		$controlId = Tools::escapeString($controlId);
+		$text = Tools::escapeString($text);
+		return sprintf($script, $controlId, $text);
+	}
+
+	static function setTextColor($controlId, $textColor)
+	{
+		Manialink::appendScript(static::getSetTextColor($controlId, $textColor));
+	}
+
 	static function setEntryValue($controlId, $value)
 	{
 		$script = 'manialib_set_entry_value("%s", "%s"); ';
@@ -125,13 +138,42 @@ abstract class Manipulation
 		Manialink::appendScript($script);
 	}
 
-	static function setImage($controlId, $URL)
+	static function getSetImage($controlId, $URL)
 	{
 		$script = 'manialib_set_image("%s", "%s"); ';
 		$controlId = Tools::escapeString($controlId);
 		$URL = Tools::escapeString($URL);
-		$script = sprintf($script, $controlId, $URL);
-		Manialink::appendScript($script);
+		return sprintf($script, $controlId, $URL);
+	}
+
+	static function setImage($controlId, $URL)
+	{
+		Manialink::appendScript(static::getSetImage($controlId, $URL));
+	}
+
+	static function getSetImagefocus($controlId, $URL)
+	{
+		$script = 'manialib_set_imagefocus("%s", "%s"); ';
+		$controlId = Tools::escapeString($controlId);
+		$URL = Tools::escapeString($URL);
+		return sprintf($script, $controlId, $URL);
+	}
+
+	static function setImagefocus($controlId, $URL)
+	{
+		Manialink::appendScript(static::getSetImagefocus($controlId, $URL));
+	}
+
+	static function getSetOpacity($controlId, $opacity)
+	{
+		$script = 'manialib_set_opacity("%s", %f); ';
+		$controlId = Tools::escapeString($controlId);
+		return sprintf($script, $controlId, $opacity);
+	}
+
+	static function setOpacity($controlId, $opacity)
+	{
+		Manialink::appendScript(static::getSetOpacity($controlId, $opacity));
 	}
 
 	static function setStyle($controlId, $style)
