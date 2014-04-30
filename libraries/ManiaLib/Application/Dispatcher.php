@@ -82,7 +82,6 @@ class Dispatcher extends \ManiaLib\Utils\Singleton
 		}
 		catch(\Exception $e)
 		{
-			ErrorHandling::exceptionHandler($e);
 			call_user_func(Bootstrapper::$errorHandlingCallback, $e);
 			Response::getInstance()->render();
 		}
