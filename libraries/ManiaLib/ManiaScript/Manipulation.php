@@ -151,10 +151,36 @@ abstract class Manipulation
 
 	static function getSetTextColor($controlId, $textColor)
 	{
-		$script = 'manialib_set_text("%s", "%s"); ';
+		$script = 'manialib_set_textcolor("%s", "%s"); ';
 		$controlId = Tools::escapeString($controlId);
-		$text = Tools::escapeString($text);
-		return sprintf($script, $controlId, $text);
+		$textColor = Tools::escapeString($textColor);
+		return sprintf($script, $controlId, $textColor);
+	}
+
+	static function setColorize($controlId, $colorize)
+	{
+		return static::setColorize($controlId, $colorize);
+	}
+
+	static function getSetColorize($controlId, $colorize)
+	{
+		$script = 'manialib_set_colorize("%s", "%s"); ';
+		$controlId = Tools::escapeString($controlId);
+		$colorize = Tools::escapeString($colorize);
+		return sprintf($script, $controlId, $colorize);
+	}
+
+	static function setModulateColor($controlId, $modulateColor)
+	{
+		return static::getSetModulateColor($controlId, $modulateColor);
+	}
+
+	static function getSetModulateColor($controlId, $modulateColor)
+	{
+		$script = 'manialib_set_modulateColor("%s", "%s"); ';
+		$controlId = Tools::escapeString($controlId);
+		$modulateColor = Tools::escapeString($modulateColor);
+		return sprintf($script, $controlId, $modulateColor);
 	}
 
 	static function setEntryValue($controlId, $value)

@@ -36,13 +36,15 @@ abstract class Action
 	const absolute_posy = 'absolute_posy';
 	const absolute_posz = 'absolute_posz';
 	const set_text = 'set_text';
-	const set_textcolor = 'set_textcolo';
+	const set_textcolor = 'set_textcolor';
 	const set_entry_value = 'set_entry_value';
 	const set_image = 'set_image';
 	const set_imagefocus = 'set_imagefocus';
 	const set_opacity = 'set_opacity';
 	const set_style = 'set_style';
 	const set_substyle = 'set_substyle';
+	const set_colorize = 'set_colorize';
+	const set_modulateColor = 'set_modulateColor';
 	const disable_links = 'disable_links';
 	const enable_links = 'enable_links';
 	const set_clublink = 'set_clublink';
