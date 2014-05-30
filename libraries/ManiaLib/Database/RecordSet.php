@@ -1,7 +1,7 @@
 <?php
 /**
  * ManiaLib - Lightweight PHP framework for Manialinks
- * 
+ *
  * @see         http://code.google.com/p/manialib/
  * @copyright   Copyright (c) 2009-2011 NADEO (http://www.nadeo.com)
  * @license     http://www.gnu.org/licenses/lgpl.html LGPL License 3
@@ -14,9 +14,9 @@ namespace ManiaLib\Database;
 
 class RecordSet
 {
-	const FETCH_ASSOC = MYSQL_ASSOC;
-	const FETCH_NUM = MYSQL_NUM;
-	const FETCH_BOTH = MYSQL_BOTH;
+	const FETCH_ASSOC = MYSQLI_ASSOC;
+	const FETCH_NUM = MYSQLI_NUM;
+	const FETCH_BOTH = MYSQLI_BOTH;
 
 	protected $result;
 
@@ -39,7 +39,7 @@ class RecordSet
 	 */
 	function fetchRow()
 	{
-		return mysql_fetch_row($this->result);
+		return mysqli_fetch_row($this->result);
 	}
 
 	function fetchArrayOfRow()
@@ -58,7 +58,7 @@ class RecordSet
 	 */
 	function fetchAssoc()
 	{
-		return mysql_fetch_assoc($this->result);
+		return mysqli_fetch_assoc($this->result);
 	}
 
 	function fetchArrayOfAssoc()
@@ -77,7 +77,7 @@ class RecordSet
 	 */
 	function fetchArray($resultType = self::FETCH_ASSOC)
 	{
-		return mysql_fetch_array($this->result, $resultType);
+		return mysqli_fetch_array($this->result, $resultType);
 	}
 
 	/**
@@ -92,16 +92,16 @@ class RecordSet
 		{
 			if($params)
 			{
-				return mysql_fetch_object($this->result, $className, $params);
+				return mysqli_fetch_object($this->result, $className, $params);
 			}
 			else
 			{
-				return mysql_fetch_object($this->result, $className);
+				return mysqli_fetch_object($this->result, $className);
 			}
 		}
 		else
 		{
-			return mysql_fetch_object($this->result);
+			return mysqli_fetch_object($this->result);
 		}
 	}
 
@@ -139,7 +139,7 @@ class RecordSet
 	function fetchArrayOfSingleValues()
 	{
 		$array = array();
-		while($row = mysql_fetch_row($this->result))
+		while($row = mysqli_fetch_row($this->result))
 		{
 			$array[] = reset($row);
 		}
@@ -152,7 +152,7 @@ class RecordSet
 	 */
 	function recordCount()
 	{
-		return mysql_num_rows($this->result);
+		return mysqli_num_rows($this->result);
 	}
 
 }
