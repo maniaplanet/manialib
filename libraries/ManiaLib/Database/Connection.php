@@ -115,7 +115,7 @@ class Connection
 			$this->connection = mysqli_connect(
 				$this->params->host, $this->params->user, $this->params->password);
 		}
-		var_dump($this->connection);
+		//var_dump($this->connection);
 
 		if(!$this->connection)
 		{
