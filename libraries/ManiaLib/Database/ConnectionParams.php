@@ -16,14 +16,6 @@ class ConnectionParams
 {
 
 	/**
-	 * Human readeable identifier of the connection, to use with the factory.
-	 * For example "server01" so you can use Connection::factory("server01")
-	 * to retrieve a connection with the params from that object.
-	 * @var string
-	 */
-	public $id;
-
-	/**
 	 * Hostname
 	 * @var string
 	 */
