@@ -95,7 +95,7 @@ class ConfigLoader extends \ManiaLib\Utils\Singleton
 		else
 		{
 			$key = Cache::getPrefix().get_called_class();
-			$cache = Cache::factory($this->enableCache ? \ManiaLib\Cache\APC : \ManiaLib\Cache\NONE);
+			$cache = Cache::factory($this->enableCache ? \ManiaLib\Cache\MEMCACHE : \ManiaLib\Cache\NONE);
 
 			$values = $cache->fetch($key);
 			if($values === false)
@@ -108,7 +108,7 @@ class ConfigLoader extends \ManiaLib\Utils\Singleton
 						$values = array_merge($values, $this->loadFile($filename));
 					}
 				}
-				$cache->add($key, $values);
+				$cache->add($key, $values, 600);
 			}
 			$this->arrayToSingletons($values);
 		}
