@@ -48,7 +48,7 @@ class SimpleTemplates implements RendererInterface
 		$vars = \ManiaLib\Application\Response::getInstance()->getAll();
 		extract($vars);
 
-		error_reporting(E_ALL ^ E_NOTICE);
+		error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
 
 		if(file_exists(MANIALIB_APP_PATH.'resources/'.$viewName.'.php'))
 		{
@@ -59,7 +59,7 @@ class SimpleTemplates implements RendererInterface
 			require MANIALIB_APP_PATH.'ressources/'.$viewName.'.php';
 		}
 
-		error_reporting(E_ALL);
+		error_reporting(E_ALL & ~E_STRICT & ~E_DEPRECATED);
 	}
 
 	static function redirect($URL)
