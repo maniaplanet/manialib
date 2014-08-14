@@ -109,8 +109,13 @@ class ConfigLoader extends \ManiaLib\Utils\Singleton
 					}
 				}
 				$cache->add($key, $values, 600);
+                $cached = true;
 			}
 			$this->arrayToSingletons($values);
+            if(isset($cached))
+            {
+                \ManiaLib\Utils\Logger::info('Config cached at '.$key);
+            }
 		}
 	}
 	
