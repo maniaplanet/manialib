@@ -95,7 +95,7 @@ class ConfigLoader extends \ManiaLib\Utils\Singleton
 		else
 		{
 			$key = Cache::getPrefix().get_called_class();
-			$cache = Cache::factory($this->enableCache ? \ManiaLib\Cache\MEMCACHE : \ManiaLib\Cache\NONE);
+			$cache = $this->getCache();
 
 			$values = $cache->fetch($key);
 			if($values === false)
@@ -118,7 +118,23 @@ class ConfigLoader extends \ManiaLib\Utils\Singleton
             }
 		}
 	}
-	
+
+    protected function getCache()
+    {
+        $params = new \ManiaLib\Cache\Drivers\MemcacheConnectionParams();
+		$params->id = 'local';
+		$params->hosts = array('127.0.0.1');
+
+		try
+		{
+			return \ManiaLib\Cache\Drivers\Memcache::factory($params);
+		}
+		catch (\Exception $e)
+		{
+			return \ManiaLib\Cache\Drivers\NoCache::getInstance();
+		}
+    }
+
 	protected function loadFile($filename)
 	{
 		$values = parse_ini_file($filename, true);
