@@ -110,6 +110,18 @@ class Frame extends Component implements Drawable
 			$this->xml->setAttribute('posn', $this->posX.' '.$this->posY.' '.$this->posZ);
 		}
 		if($this->scale !== null) $this->xml->setAttribute('scale', $this->scale);
+
+        if ($this->getAttribute('clip'))
+        {
+            $this->xml->setAttribute('clip', $this->getAttribute('clip'));
+        }
+        if ($this->getAttribute('clipsizen')) {
+            $this->xml->setAttribute('clipsizen', $this->getAttribute('clipsizen'));
+        }
+        if ($this->getAttribute('clipposn'))
+        {
+            $this->xml->setAttribute('clipposn', $this->getAttribute('clipposn'));
+        }
 	}
 
 	function getDOMElement()
