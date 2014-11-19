@@ -32,3 +32,5 @@ Useful links
 ------------
 
 * Support forum: http://forum.maniaplanet.com/viewforum.php?f=40
+
+>:)
