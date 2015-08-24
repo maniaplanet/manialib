@@ -95,7 +95,7 @@ class StyleParser
 	 */
 	static function declareFont($name, $normal, $bold = null, $italic = null, $boldItalic = null)
 	{
-		$this->fonts[$name] = array(
+		self::$fonts[$name] = array(
 			0 => $normal,
 			StyleParser::BOLD => $bold ? : $normal,
 			StyleParser::ITALIC => $italic ? : $normal,
