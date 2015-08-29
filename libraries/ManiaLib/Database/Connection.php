@@ -72,14 +72,12 @@ class Connection
 		$config = Config::getInstance();
 
 		$params = new ConnectionParams();
-		$params->id = 'default';
 		$params->host = $config->host;
 		$params->user = $config->user;
 		$params->password = $config->password;
 		$params->database = $config->database;
 		$params->charset = $config->charset;
 		$params->persistent = $config->persistent;
-
 		return static::factory($params);
 	}
 
@@ -91,15 +89,15 @@ class Connection
 	 */
 	static function factory(ConnectionParams $params)
 	{
-		if(!$params->id)
+		if(!$params->host)
 		{
-			throw new Exception('ConnectionParams object has no ID');
+			throw new Exception('No Host:');
 		}
-		if(!array_key_exists($params->id, static::$connections))
+		if(!array_key_exists($params->host, static::$connections))
 		{
-			static::$connections[$params->id] = new static($params);
+			static::$connections[$params->host] = new static($params);
 		}
-		return static::$connections[$params->id];
+		return static::$connections[$params->host];
 	}
 
 	protected function __construct(ConnectionParams $params)
@@ -109,15 +107,15 @@ class Connection
 
 		if($this->params->persistent)
 		{
-			$this->connection = mysql_pconnect(
-				$this->params->host, $this->params->user, $this->params->password, $this->params->ssl ? MYSQL_CLIENT_SSL : null);
+			$this->connection = mysqli_connect(
+				'p:'.$this->params->host.'', $this->params->user, $this->params->password);
 		}
 		else
 		{
-			$this->connection = mysql_connect(
-				$this->params->host, $this->params->user, $this->params->password, true,
-				$this->params->ssl ? MYSQL_CLIENT_SSL : null);
+			$this->connection = mysqli_connect(
+				$this->params->host, $this->params->user, $this->params->password);
 		}
+		//var_dump($this->connection);
 
 		if(!$this->connection)
 		{
@@ -133,7 +131,7 @@ class Connection
 		if($charset != $this->charset)
 		{
 			$this->charset = $charset;
-			if(!mysql_set_charset($charset, $this->connection))
+			if(!mysqli_set_charset($this->connection, $charset))
 			{
 				throw new Exception('Couldn\'t set charset: '.$charset);
 			}
@@ -145,16 +143,17 @@ class Connection
 		if($database && $database != $this->database)
 		{
 			$this->database = $database;
-			if(!mysql_select_db($this->database, $this->connection))
+			if(!mysqli_select_db($this->connection, $this->database))
 			{
-				throw new Exception(mysql_error(), mysql_errno());
+				throw new Exception(mysqli_error(), mysqli_errno());
 			}
+			var_dump($this->connection);
 		}
 	}
 
 	function quote($string)
 	{
-		return '\''.mysql_real_escape_string($string, $this->connection).'\'';
+		return '\''.mysqli_real_escape_string($this->connection, $string).'\'';
 	}
 
 	/**
@@ -170,10 +169,10 @@ class Connection
 
 		$query = $this->instrumentQuery($query);
 
-		$result = mysql_query($query, $this->connection);
+		$result = mysqli_query($this->connection, $query);
 		if(!$result)
 		{
-			throw new QueryException(mysql_error().': '.$query, mysql_errno());
+			throw new QueryException(mysqli_error().': '.$query, mysqli_errno());
 		}
 		if($this->config->queryLog)
 		{
@@ -231,12 +230,12 @@ class Connection
 
 	function affectedRows()
 	{
-		return mysql_affected_rows($this->connection);
+		return mysqli_affected_rows($this->connection);
 	}
 
 	function insertID()
 	{
-		return mysql_insert_id($this->connection);
+		return mysqli_insert_id($this->connection);
 	}
 
 	function isConnected()
