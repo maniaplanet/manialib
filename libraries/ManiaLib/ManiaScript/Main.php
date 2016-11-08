@@ -20,36 +20,35 @@ use ManiaLib\Gui\Manialink;
 abstract class Main
 {
 
-	static function begin()
-	{
-		Manialink::appendScript('main() { ');
-	}
+    static function begin()
+    {
+        Manialink::appendScript('main() { ');
+    }
 
-	static function getBegin()
-	{
-		return 'main() { ';
-	}
+    static function getBegin()
+    {
+        return 'main() { ';
+    }
 
-	static function loop()
-	{
-		Manialink::appendScript('manialib_main_loop();');
-	}
+    static function loop()
+    {
+        Manialink::appendScript('manialib_main_loop();');
+    }
 
-	static function getLoop()
-	{
-		return 'manialib_main_loop();';
-	}
+    static function getLoop()
+    {
+        return 'manialib_main_loop();';
+    }
 
-	static function end()
-	{
-		Manialink::appendScript('}');
-	}
+    static function end()
+    {
+        Manialink::appendScript('}');
+    }
 
-	static function getEnd()
-	{
-		return '}';
-	}
+    static function getEnd()
+    {
+        return '}';
+    }
 
 }
 
-?>

@@ -20,264 +20,264 @@ use ManiaLib\Gui\Manialink;
 abstract class Manipulation
 {
 
-	static function hide($controlId)
-	{
-		Manialink::appendScript(self::getHide($controlId));
-	}
+    static function hide($controlId)
+    {
+        Manialink::appendScript(self::getHide($controlId));
+    }
 
-	static function getHide($controlId)
-	{
-		$script = 'manialib_hide("%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$script = sprintf($script, $controlId);
-		return $script;
-	}
+    static function getHide($controlId)
+    {
+        $script = 'manialib_hide("%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $script = sprintf($script, $controlId);
+        return $script;
+    }
 
-	static function show($controlId)
-	{
-		Manialink::appendScript(self::getShow($controlId));
-	}
+    static function show($controlId)
+    {
+        Manialink::appendScript(self::getShow($controlId));
+    }
 
-	static function getShow($controlId)
-	{
-		$script = 'manialib_show("%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$script = sprintf($script, $controlId);
-		return $script;
-	}
+    static function getShow($controlId)
+    {
+        $script = 'manialib_show("%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $script = sprintf($script, $controlId);
+        return $script;
+    }
 
-	static function toggle($controlId)
-	{
-		Manialink::appendScript(self::getToggle($controlId));
-	}
+    static function toggle($controlId)
+    {
+        Manialink::appendScript(self::getToggle($controlId));
+    }
 
-	static function getToggle($controlId)
-	{
-		$script = 'manialib_toggle("%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$script = sprintf($script, $controlId);
-		return $script;
-	}
+    static function getToggle($controlId)
+    {
+        $script = 'manialib_toggle("%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $script = sprintf($script, $controlId);
+        return $script;
+    }
 
-	static function absolutePosx($controlId, $posx)
-	{
-		Manialink::appendScript(static::getAbsolutePosx($controlId, $posx));
-	}
+    static function absolutePosx($controlId, $posx)
+    {
+        Manialink::appendScript(static::getAbsolutePosx($controlId, $posx));
+    }
 
-	static function getAbsolutePosx($controlId, $posx)
-	{
-		$script = 'manialib_absolute_posx("%s", %f); ';
-		$controlId = Tools::escapeString($controlId);
-		return sprintf($script, $controlId, $posx);
-	}
+    static function getAbsolutePosx($controlId, $posx)
+    {
+        $script = 'manialib_absolute_posx("%s", %f); ';
+        $controlId = Tools::escapeString($controlId);
+        return sprintf($script, $controlId, $posx);
+    }
 
-	static function absolutePosy($controlId, $posy)
-	{
-		Manialink::appendScript(static::getAbsolutePosy($controlId, $posy));
-	}
+    static function absolutePosy($controlId, $posy)
+    {
+        Manialink::appendScript(static::getAbsolutePosy($controlId, $posy));
+    }
 
-	static function getAbsolutePosy($controlId, $posy)
-	{
-		$script = 'manialib_absolute_posy("%s", %f); ';
-		$controlId = Tools::escapeString($controlId);
-		return sprintf($script, $controlId, $posy);
-	}
+    static function getAbsolutePosy($controlId, $posy)
+    {
+        $script = 'manialib_absolute_posy("%s", %f); ';
+        $controlId = Tools::escapeString($controlId);
+        return sprintf($script, $controlId, $posy);
+    }
 
-	static function absolutePosz($controlId, $posz)
-	{
-		Manialink::appendScript(static::getAbsolutePosz($controlId, $posz));
-	}
+    static function absolutePosz($controlId, $posz)
+    {
+        Manialink::appendScript(static::getAbsolutePosz($controlId, $posz));
+    }
 
-	static function getAbsolutePosz($controlId, $posz)
-	{
-		$script = 'manialib_absolute_posz("%s", %f); ';
-		$controlId = Tools::escapeString($controlId);
-		return sprintf($script, $controlId, $posz);
-	}
+    static function getAbsolutePosz($controlId, $posz)
+    {
+        $script = 'manialib_absolute_posz("%s", %f); ';
+        $controlId = Tools::escapeString($controlId);
+        return sprintf($script, $controlId, $posz);
+    }
 
-	static function posx($controlId, $posx)
-	{
-		Manialink::appendScript(static::getPosx($controlId, $posx));
-	}
+    static function posx($controlId, $posx)
+    {
+        Manialink::appendScript(static::getPosx($controlId, $posx));
+    }
 
-	static function getPosx($controlId, $posx)
-	{
-		$script = 'manialib_posx("%s", %f); ';
-		$controlId = Tools::escapeString($controlId);
-		return sprintf($script, $controlId, $posx);
-	}
+    static function getPosx($controlId, $posx)
+    {
+        $script = 'manialib_posx("%s", %f); ';
+        $controlId = Tools::escapeString($controlId);
+        return sprintf($script, $controlId, $posx);
+    }
 
-	static function posy($controlId, $posy)
-	{
-		Manialink::appendScript(static::getPosy($controlId, $posy));
-	}
+    static function posy($controlId, $posy)
+    {
+        Manialink::appendScript(static::getPosy($controlId, $posy));
+    }
 
-	static function getPosy($controlId, $posy)
-	{
-		$script = 'manialib_posy("%s", %f); ';
-		$controlId = Tools::escapeString($controlId);
-		return sprintf($script, $controlId, $posy);
-	}
+    static function getPosy($controlId, $posy)
+    {
+        $script = 'manialib_posy("%s", %f); ';
+        $controlId = Tools::escapeString($controlId);
+        return sprintf($script, $controlId, $posy);
+    }
 
-	static function posz($controlId, $posz)
-	{
-		Manialink::appendScript(static::getPosz($controlId, $posz));
-	}
+    static function posz($controlId, $posz)
+    {
+        Manialink::appendScript(static::getPosz($controlId, $posz));
+    }
 
-	static function getPosz($controlId, $posz)
-	{
-		$script = 'manialib_posz("%s", %f); ';
-		$controlId = Tools::escapeString($controlId);
-		return sprintf($script, $controlId, $posz);
-	}
+    static function getPosz($controlId, $posz)
+    {
+        $script = 'manialib_posz("%s", %f); ';
+        $controlId = Tools::escapeString($controlId);
+        return sprintf($script, $controlId, $posz);
+    }
 
-	static function setText($controlId, $text)
-	{
-		Manialink::appendScript(static::getSetText($controlId, $text));
-	}
+    static function setText($controlId, $text)
+    {
+        Manialink::appendScript(static::getSetText($controlId, $text));
+    }
 
-	static function getSetText($controlId, $text)
-	{
-		$script = 'manialib_set_text("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$text = Tools::escapeString($text);
-		return sprintf($script, $controlId, $text);
-	}
+    static function getSetText($controlId, $text)
+    {
+        $script = 'manialib_set_text("%s", "%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $text = Tools::escapeString($text);
+        return sprintf($script, $controlId, $text);
+    }
 
-	static function setTextColor($controlId, $textColor)
-	{
-		Manialink::appendScript(static::getSetTextColor($controlId, $textColor));
-	}
+    static function setTextColor($controlId, $textColor)
+    {
+        Manialink::appendScript(static::getSetTextColor($controlId, $textColor));
+    }
 
-	static function getSetTextColor($controlId, $textColor)
-	{
-		$script = 'manialib_set_textcolor("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$textColor = Tools::escapeString($textColor);
-		return sprintf($script, $controlId, $textColor);
-	}
+    static function getSetTextColor($controlId, $textColor)
+    {
+        $script = 'manialib_set_textcolor("%s", "%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $textColor = Tools::escapeString($textColor);
+        return sprintf($script, $controlId, $textColor);
+    }
 
-	static function setColorize($controlId, $colorize)
-	{
-		return static::setColorize($controlId, $colorize);
-	}
+    static function setColorize($controlId, $colorize)
+    {
+        return static::setColorize($controlId, $colorize);
+    }
 
-	static function getSetColorize($controlId, $colorize)
-	{
-		$script = 'manialib_set_colorize("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$colorize = Tools::escapeString($colorize);
-		return sprintf($script, $controlId, $colorize);
-	}
+    static function getSetColorize($controlId, $colorize)
+    {
+        $script = 'manialib_set_colorize("%s", "%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $colorize = Tools::escapeString($colorize);
+        return sprintf($script, $controlId, $colorize);
+    }
 
-	static function setModulateColor($controlId, $modulateColor)
-	{
-		return static::getSetModulateColor($controlId, $modulateColor);
-	}
+    static function setModulateColor($controlId, $modulateColor)
+    {
+        return static::getSetModulateColor($controlId, $modulateColor);
+    }
 
-	static function getSetModulateColor($controlId, $modulateColor)
-	{
-		$script = 'manialib_set_modulateColor("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$modulateColor = Tools::escapeString($modulateColor);
-		return sprintf($script, $controlId, $modulateColor);
-	}
+    static function getSetModulateColor($controlId, $modulateColor)
+    {
+        $script = 'manialib_set_modulateColor("%s", "%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $modulateColor = Tools::escapeString($modulateColor);
+        return sprintf($script, $controlId, $modulateColor);
+    }
 
-	static function setEntryValue($controlId, $value)
-	{
-		Manialink::appendScript(static::getSetEntryValue($controlId, $value));
-	}
+    static function setEntryValue($controlId, $value)
+    {
+        Manialink::appendScript(static::getSetEntryValue($controlId, $value));
+    }
 
-	static function getSetEntryValue($controlId, $value)
-	{
-		$script = 'manialib_set_entry_value("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$value = Tools::escapeString($value);
-		return sprintf($script, $controlId, $value);
-	}
+    static function getSetEntryValue($controlId, $value)
+    {
+        $script = 'manialib_set_entry_value("%s", "%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $value = Tools::escapeString($value);
+        return sprintf($script, $controlId, $value);
+    }
 
-	static function setImage($controlId, $URL)
-	{
-		Manialink::appendScript(static::getSetImage($controlId, $URL));
-	}
+    static function setImage($controlId, $URL)
+    {
+        Manialink::appendScript(static::getSetImage($controlId, $URL));
+    }
 
-	static function getSetImage($controlId, $URL)
-	{
-		$script = 'manialib_set_image("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$URL = Tools::escapeString($URL);
-		return sprintf($script, $controlId, $URL);
-	}
+    static function getSetImage($controlId, $URL)
+    {
+        $script = 'manialib_set_image("%s", "%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $URL = Tools::escapeString($URL);
+        return sprintf($script, $controlId, $URL);
+    }
 
-	static function setImagefocus($controlId, $URL)
-	{
-		Manialink::appendScript(static::getSetImagefocus($controlId, $URL));
-	}
+    static function setImagefocus($controlId, $URL)
+    {
+        Manialink::appendScript(static::getSetImagefocus($controlId, $URL));
+    }
 
-	static function getSetImagefocus($controlId, $URL)
-	{
-		$script = 'manialib_set_imagefocus("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$URL = Tools::escapeString($URL);
-		return sprintf($script, $controlId, $URL);
-	}
+    static function getSetImagefocus($controlId, $URL)
+    {
+        $script = 'manialib_set_imagefocus("%s", "%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $URL = Tools::escapeString($URL);
+        return sprintf($script, $controlId, $URL);
+    }
 
-	static function setOpacity($controlId, $opacity)
-	{
-		Manialink::appendScript(static::getSetOpacity($controlId, $opacity));
-	}
+    static function setOpacity($controlId, $opacity)
+    {
+        Manialink::appendScript(static::getSetOpacity($controlId, $opacity));
+    }
 
-	static function getSetOpacity($controlId, $opacity)
-	{
-		$script = 'manialib_set_opacity("%s", %f); ';
-		$controlId = Tools::escapeString($controlId);
-		return sprintf($script, $controlId, $opacity);
-	}
+    static function getSetOpacity($controlId, $opacity)
+    {
+        $script = 'manialib_set_opacity("%s", %f); ';
+        $controlId = Tools::escapeString($controlId);
+        return sprintf($script, $controlId, $opacity);
+    }
 
-	static function setStyle($controlId, $style)
-	{
-		Manialink::appendScript(static::getSetStyle($controlId, $style));
-	}
+    static function setStyle($controlId, $style)
+    {
+        Manialink::appendScript(static::getSetStyle($controlId, $style));
+    }
 
-	static function getSetStyle($controlId, $style)
-	{
-		$script = 'manialib_set_style("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$style = Tools::escapeString($style);
-		return sprintf($script, $controlId, $style);
-	}
+    static function getSetStyle($controlId, $style)
+    {
+        $script = 'manialib_set_style("%s", "%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $style = Tools::escapeString($style);
+        return sprintf($script, $controlId, $style);
+    }
 
-	static function setSubstyle($controlId, $substyle)
-	{
-		Manialink::appendScript(static::getSetSubstyle($controlId, $substyle));
-	}
+    static function setSubstyle($controlId, $substyle)
+    {
+        Manialink::appendScript(static::getSetSubstyle($controlId, $substyle));
+    }
 
-	static function getSetSubstyle($controlId, $substyle)
-	{
-		$script = 'manialib_set_substyle("%s", "%s"); ';
-		$controlId = Tools::escapeString($controlId);
-		$substyle = Tools::escapeString($substyle);
-		return sprintf($script, $controlId, $substyle);
-	}
+    static function getSetSubstyle($controlId, $substyle)
+    {
+        $script = 'manialib_set_substyle("%s", "%s"); ';
+        $controlId = Tools::escapeString($controlId);
+        $substyle = Tools::escapeString($substyle);
+        return sprintf($script, $controlId, $substyle);
+    }
 
-	static function disableLinks()
-	{
-		Manialink::appendScript(static::getDisableLinks());
-	}
+    static function disableLinks()
+    {
+        Manialink::appendScript(static::getDisableLinks());
+    }
 
-	static function getDisableLinks()
-	{
-		return 'manialib_disable_links(); ';
-	}
+    static function getDisableLinks()
+    {
+        return 'manialib_disable_links(); ';
+    }
 
-	static function enableLinks()
-	{
-		Manialink::appendScript(static::getEnableLinks());
-	}
+    static function enableLinks()
+    {
+        Manialink::appendScript(static::getEnableLinks());
+    }
 
-	static function getEnableLinks()
-	{
-		return 'manialib_enable_links(); ';
-	}
+    static function getEnableLinks()
+    {
+        return 'manialib_enable_links(); ';
+    }
 
 }

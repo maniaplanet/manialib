@@ -17,68 +17,66 @@ namespace ManiaLib\Utils;
  */
 abstract class Formatting
 {
-	/**
-	 * Removes each single character code in $codes string
-	 * Adding l, h or p will also strip links
-	 * Adding an hexadecimal char will also strip colors
-	 */
-	static function stripCodes($string, $codes)
-	{
-		if(preg_match('/[hlp]/iu', $codes))
-			$string = self::stripLinks($string);
-		if(preg_match('/[0-9a-f]/iu', $codes))
-			$string = self::stripColors($string);
-		return preg_replace('/(?<!\$)((?:\$\$)*)\$['.$codes.']/iu', '$1', $string);
-	}
-	
-	/**
-	 * Removes wide, bold and shadowed
-	 */
-	static function stripWideFonts($string)
-	{
-		return self::stripCodes($string, 'wos');
-	}
+    /**
+     * Removes each single character code in $codes string
+     * Adding l, h or p will also strip links
+     * Adding an hexadecimal char will also strip colors
+     */
+    static function stripCodes($string, $codes)
+    {
+        if (preg_match('/[hlp]/iu', $codes))
+            $string = self::stripLinks($string);
+        if (preg_match('/[0-9a-f]/iu', $codes))
+            $string = self::stripColors($string);
+        return preg_replace('/(?<!\$)((?:\$\$)*)\$[' . $codes . ']/iu', '$1', $string);
+    }
 
-	/**
-	 * Removes links
-	 */
-	static function stripLinks($string)
-	{
-		return preg_replace('/(?<!\$)((?:\$\$)*)\$[hlp](?:\[.*?\]|\[.*?$)?(.*?)(?:\$[hlp]|(\$z)|$)/iu', '$1$2$3', $string);
-	}
+    /**
+     * Removes wide, bold and shadowed
+     */
+    static function stripWideFonts($string)
+    {
+        return self::stripCodes($string, 'wos');
+    }
 
-	/**
-	 * Removes colors
-	 */
-	static function stripColors($string)
-	{
-		return preg_replace('/(?<!\$)((?:\$\$)*)\$(?:g|[0-9a-f][^\$]{0,2})/iu', '$1', $string);
-	}
+    /**
+     * Removes links
+     */
+    static function stripLinks($string)
+    {
+        return preg_replace('/(?<!\$)((?:\$\$)*)\$[hlp](?:\[.*?\]|\[.*?$)?(.*?)(?:\$[hlp]|(\$z)|$)/iu', '$1$2$3', $string);
+    }
 
-	/**
-	 * Removes all styles
-	 */
-	static function stripStyles($string)
-	{
-		$string = preg_replace('/(?<!\$)((?:\$\$)*)\$[^$0-9a-hlp]/iu', '$1', $string);
-		$string = self::stripLinks($string);
-		$string = self::stripColors($string);
-		return $string;
-	}
-	
-	static function contrastColors($string, $background)
-	{
-		$background = Color::StringToRgb24($background);
-		return preg_replace_callback('/(?<!\$)((?:\$\$)*)(\$[0-9a-f][^\$]{0,2})/iu',
-				function($matches) use ($background)
-				{
-					$color = Color::StringToRgb24($matches[2]);
-					$color = Color::Contrast($color, $background);
-					$color = Color::Rgb24ToRgb12($color);
-					$color = Color::Rgb12ToString($color);
-					return $matches[1].'$'.$color;
-				}, $string);
-	}
+    /**
+     * Removes colors
+     */
+    static function stripColors($string)
+    {
+        return preg_replace('/(?<!\$)((?:\$\$)*)\$(?:g|[0-9a-f][^\$]{0,2})/iu', '$1', $string);
+    }
+
+    /**
+     * Removes all styles
+     */
+    static function stripStyles($string)
+    {
+        $string = preg_replace('/(?<!\$)((?:\$\$)*)\$[^$0-9a-hlp]/iu', '$1', $string);
+        $string = self::stripLinks($string);
+        $string = self::stripColors($string);
+        return $string;
+    }
+
+    static function contrastColors($string, $background)
+    {
+        $background = Color::StringToRgb24($background);
+        return preg_replace_callback('/(?<!\$)((?:\$\$)*)(\$[0-9a-f][^\$]{0,2})/iu',
+            function ($matches) use ($background) {
+                $color = Color::StringToRgb24($matches[2]);
+                $color = Color::Contrast($color, $background);
+                $color = Color::Rgb24ToRgb12($color);
+                $color = Color::Rgb12ToString($color);
+                return $matches[1] . '$' . $color;
+            }, $string);
+    }
 }
 
-?>

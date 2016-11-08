@@ -15,58 +15,50 @@ namespace ManiaLib\Application\Tracking;
 class Filter implements \ManiaLib\Application\Filterable
 {
 
-	/**
-	 * @var \ManiaLib\Application\Tracking\GoogleAnalytics
-	 */
-	protected $tracker;
-	protected $account;
-	protected $domainName;
-	protected $cookieNameSuffix;
+    /**
+     * @var \ManiaLib\Application\Tracking\GoogleAnalytics
+     */
+    protected $tracker;
+    protected $account;
+    protected $domainName;
+    protected $cookieNameSuffix;
 
-	function __construct($trackingAccount = null, $cookieNameSuffix=null)
-	{
-		if($trackingAccount)
-		{
-			$this->account = $trackingAccount;
-		}
-		$this->cookieNameSuffix = $cookieNameSuffix;
-	}
+    function __construct($trackingAccount = null, $cookieNameSuffix = null)
+    {
+        if ($trackingAccount) {
+            $this->account = $trackingAccount;
+        }
+        $this->cookieNameSuffix = $cookieNameSuffix;
+    }
 
-	function preFilter()
-	{
-		if(!$this->account)
-		{
-			$config = Config::getInstance();
-			$this->account = $config->account;
-			$this->domainName = $config->domainName;
-		}
+    function preFilter()
+    {
+        if (!$this->account) {
+            $config = Config::getInstance();
+            $this->account = $config->account;
+            $this->domainName = $config->domainName;
+        }
 
-		if($this->account)
-		{
-			$this->tracker = new GoogleAnalytics($this->account, $this->cookieNameSuffix, $this->domainName);
-			$this->tracker->loadCookie();
-		}
-	}
+        if ($this->account) {
+            $this->tracker = new GoogleAnalytics($this->account, $this->cookieNameSuffix, $this->domainName);
+            $this->tracker->loadCookie();
+        }
+    }
 
-	function postFilter()
-	{
-		$response = \ManiaLib\Application\Response::getInstance();
-		if($this->account)
-		{
-			$trackingURL = $response->get('trackingURL');
-			if ($trackingURL)
-			{
-				$trackingURL[] = $this->tracker->getTrackingURL();
-				$response->trackingURL = $trackingURL;
-			}
-			else
-			{
-				$response->trackingURL = array($this->tracker->getTrackingURL());
-			}
-		}
-		$response->registerView('\ManiaLib\Application\Tracking\View');
-	}
+    function postFilter()
+    {
+        $response = \ManiaLib\Application\Response::getInstance();
+        if ($this->account) {
+            $trackingURL = $response->get('trackingURL');
+            if ($trackingURL) {
+                $trackingURL[] = $this->tracker->getTrackingURL();
+                $response->trackingURL = $trackingURL;
+            } else {
+                $response->trackingURL = array($this->tracker->getTrackingURL());
+            }
+        }
+        $response->registerView('\ManiaLib\Application\Tracking\View');
+    }
 
 }
 
-?>

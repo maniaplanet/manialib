@@ -23,34 +23,34 @@ use ManiaLib\Utils\UserAgent;
 class UserAgentCheck implements Filterable
 {
 
-	protected static $callback = array('\ManiaLib\Application\Filters\UserAgentCheck', 'defaultHTMLView');
+    protected static $callback = array('\ManiaLib\Application\Filters\UserAgentCheck', 'defaultHTMLView');
 
-	/**
-	 * @deprecated user UserAgent::isManiaPlanet() instead
-	 */
-	static function isManiaplanet()
-	{
-		return UserAgent::isManiaPlanet();
-	}
+    /**
+     * @deprecated user UserAgent::isManiaPlanet() instead
+     */
+    static function isManiaplanet()
+    {
+        return UserAgent::isManiaPlanet();
+    }
 
-	/**
-	 * Sets the callback when someone tries to access the Manialink from outside the game.
-	 * The callback prints some HTML and returns void.
-	 */
-	static function setCallback($callback)
-	{
-		self::$callback = $callback;
-	}
+    /**
+     * Sets the callback when someone tries to access the Manialink from outside the game.
+     * The callback prints some HTML and returns void.
+     */
+    static function setCallback($callback)
+    {
+        self::$callback = $callback;
+    }
 
-	/**
-	 * This is the default HTML view when someone tries to access the Manialink from outside the game.
-	 * You can override this default behaviour by changing the callback with \ManiaLib\Application\Filters\UserAgentCheck::setCallback()
-	 */
-	static function defaultHTMLView()
-	{
-		$MANIALINK = Config::getInstance()->manialink;
-		$URL = $_SERVER["HTTP_HOST"].'/'.$_SERVER["REQUEST_URI"];
-		echo <<<HTML
+    /**
+     * This is the default HTML view when someone tries to access the Manialink from outside the game.
+     * You can override this default behaviour by changing the callback with \ManiaLib\Application\Filters\UserAgentCheck::setCallback()
+     */
+    static function defaultHTMLView()
+    {
+        $MANIALINK = Config::getInstance()->manialink;
+        $URL = $_SERVER["HTTP_HOST"] . '/' . $_SERVER["REQUEST_URI"];
+        echo <<<HTML
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -117,25 +117,22 @@ class UserAgentCheck implements Filterable
 	</body>
 </html>
 HTML;
-		exit;
-	}
+        exit;
+    }
 
-	function preFilter()
-	{
-		if(!Config::getInstance()->debug)
-		{
-			if(!UserAgent::isManiaPlanet())
-			{
-				call_user_func(self::$callback);
-			}
-		}
-	}
+    function preFilter()
+    {
+        if (!Config::getInstance()->debug) {
+            if (!UserAgent::isManiaPlanet()) {
+                call_user_func(self::$callback);
+            }
+        }
+    }
 
-	function postFilter()
-	{
-		
-	}
+    function postFilter()
+    {
+
+    }
 
 }
 
-?>

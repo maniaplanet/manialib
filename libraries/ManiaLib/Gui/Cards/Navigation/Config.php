@@ -1,7 +1,7 @@
 <?php
 /**
  * ManiaLib - Lightweight PHP framework for Manialinks
- * 
+ *
  * @see         http://code.google.com/p/manialib/
  * @copyright   Copyright (c) 2009-2011 NADEO (http://www.nadeo.com)
  * @license     http://www.gnu.org/licenses/lgpl.html LGPL License 3
@@ -18,11 +18,10 @@ namespace ManiaLib\Gui\Cards\Navigation;
 class Config extends \ManiaLib\Utils\Singleton
 {
 
-	/**
-	 * @var string URL of the image for header of the menu. Image ratio is 1:1
-	 */
-	public $titleBgURL;
+    /**
+     * @var string URL of the image for header of the menu. Image ratio is 1:1
+     */
+    public $titleBgURL;
 
 }
 
-?>

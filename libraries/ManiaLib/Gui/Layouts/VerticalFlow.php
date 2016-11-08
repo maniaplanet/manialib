@@ -1,7 +1,7 @@
 <?php
 /**
  * ManiaLib - Lightweight PHP framework for Manialinks
- * 
+ *
  * @see         http://code.google.com/p/manialib/
  * @copyright   Copyright (c) 2009-2011 NADEO (http://www.nadeo.com)
  * @license     http://www.gnu.org/licenses/lgpl.html LGPL License 3
@@ -18,34 +18,31 @@ namespace ManiaLib\Gui\Layouts;
 class VerticalFlow extends AbstractLayout
 {
 
-	protected $maxWidth = 0;
-	protected $currentColumnElementCount = 0;
+    protected $maxWidth = 0;
+    protected $currentColumnElementCount = 0;
 
-	function preFilter(\ManiaLib\Gui\Component $item)
-	{
-		// add minimal number to avoid floating error
-		$availableHeight = $this->sizeY + $this->yIndex - $this->borderHeight + 0.1;
+    function preFilter(\ManiaLib\Gui\Component $item)
+    {
+        // add minimal number to avoid floating error
+        $availableHeight = $this->sizeY + $this->yIndex - $this->borderHeight + 0.1;
 
-		// If end of the line is reached
-		if($availableHeight < $item->getRealSizeY() & $this->currentColumnElementCount > 0)
-		{
-			$this->xIndex += $this->maxWidth + $this->marginWidth;
-			$this->yIndex = $this->borderHeight;
-			$this->currentColumnElementCount = 0;
-			$this->maxWidth = 0;
-		}
-	}
+        // If end of the line is reached
+        if ($availableHeight < $item->getRealSizeY() & $this->currentColumnElementCount > 0) {
+            $this->xIndex += $this->maxWidth + $this->marginWidth;
+            $this->yIndex = $this->borderHeight;
+            $this->currentColumnElementCount = 0;
+            $this->maxWidth = 0;
+        }
+    }
 
-	function postFilter(\ManiaLib\Gui\Component $item)
-	{
-		$this->yIndex -= $item->getRealSizeY() + $this->marginHeight;
-		if(!$this->maxWidth || $item->getRealSizeX() > $this->maxWidth)
-		{
-			$this->maxWidth = $item->getRealSizeX();
-		}
-		$this->currentColumnElementCount++;
-	}
+    function postFilter(\ManiaLib\Gui\Component $item)
+    {
+        $this->yIndex -= $item->getRealSizeY() + $this->marginHeight;
+        if (!$this->maxWidth || $item->getRealSizeX() > $this->maxWidth) {
+            $this->maxWidth = $item->getRealSizeX();
+        }
+        $this->currentColumnElementCount++;
+    }
 
 }
 
-?>

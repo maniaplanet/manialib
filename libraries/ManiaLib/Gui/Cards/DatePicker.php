@@ -18,37 +18,36 @@ use ManiaLib\Gui\Elements\Button;
 
 class DatePicker extends \ManiaLib\Gui\Component
 {
-	/**
-	 * @var \ManiaLib\Gui\Elements\Entry
-	 */
-	public $entry;
+    /**
+     * @var \ManiaLib\Gui\Elements\Entry
+     */
+    public $entry;
 
-	/**
-	 * @var \ManiaLib\Gui\Button
-	 */
-	public $button;
+    /**
+     * @var \ManiaLib\Gui\Button
+     */
+    public $button;
 
-	function __construct ()
-	{
-		$this->entry = new Entry();
-		$this->entry->setId('datepicker-result');
-		$this->entry->setScriptEvents();
-		$this->entry->setVAlign('center');
-		$this->entry->setPosition(0, -4);
+    function __construct()
+    {
+        $this->entry = new Entry();
+        $this->entry->setId('datepicker-result');
+        $this->entry->setScriptEvents();
+        $this->entry->setVAlign('center');
+        $this->entry->setPosition(0, -4);
 
-		$this->button = new Button();
-		$this->button->setId('datepicker-button');
-		$this->button->setScriptEvents();
-		$this->button->setText('Select');
-		$this->button->setPosition(25);
-	}
+        $this->button = new Button();
+        $this->button->setId('datepicker-button');
+        $this->button->setScriptEvents();
+        $this->button->setText('Select');
+        $this->button->setPosition(25);
+    }
 
-	function save()
-	{
-		$this->entry->save();
-		$this->button->save();
+    function save()
+    {
+        $this->entry->save();
+        $this->button->save();
 
-		Manialink::appendScript('manialib_ui_datepicker_init("'.$this->entry->getId().'", "'.$this->button->getId().'");');
-	}
+        Manialink::appendScript('manialib_ui_datepicker_init("' . $this->entry->getId() . '", "' . $this->button->getId() . '");');
+    }
 }
-?>

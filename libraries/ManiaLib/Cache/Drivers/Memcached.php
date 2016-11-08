@@ -19,80 +19,73 @@ namespace ManiaLib\Cache\Drivers;
 class Memcached extends \ManiaLib\Utils\Singleton implements \ManiaLib\Cache\CacheInterface
 {
 
-	/**
-	 * @var \Memcached
-	 */
-	protected $memcached;
+    /**
+     * @var \Memcached
+     */
+    protected $memcached;
 
-	protected function __construct()
-	{
-		if(!class_exists('Memcached'))
-		{
-			throw new Exception('PECL\Memcached extension not found');
-		}
-		$this->memcached = new \Memcached();
+    protected function __construct()
+    {
+        if (!class_exists('Memcached')) {
+            throw new Exception('PECL\Memcached extension not found');
+        }
+        $this->memcached = new \Memcached();
 
-		$config = MemcacheConfig::getInstance();
-		foreach($config->hosts as $host)
-		{
-			$this->memcached->addServer($host);
-		}
-	}
+        $config = MemcacheConfig::getInstance();
+        foreach ($config->hosts as $host) {
+            $this->memcached->addServer($host);
+        }
+    }
 
-	/**
-	 * @deprecated
-	 */
-	function exists($key)
-	{
-		return!($this->fetch($key) === false);
-	}
+    /**
+     * @deprecated
+     */
+    function exists($key)
+    {
+        return !($this->fetch($key) === false);
+    }
 
-	function fetch($key)
-	{
-		$key = str_replace('\\', '/', $key);
-		return $this->memcached->get($key);
-	}
+    function fetch($key)
+    {
+        $key = str_replace('\\', '/', $key);
+        return $this->memcached->get($key);
+    }
 
-	function add($key, $value, $ttl=0)
-	{
-		$key = str_replace('\\', '/', $key);
-		if(!$this->memcached->add($key, $value, $ttl))
-		{
-			$message = sprintf('Memcache::set() with key "%s" failed', $key);
-			\ManiaLib\Utils\Logger::error($message);
-		}
-	}
+    function add($key, $value, $ttl = 0)
+    {
+        $key = str_replace('\\', '/', $key);
+        if (!$this->memcached->add($key, $value, $ttl)) {
+            $message = sprintf('Memcache::set() with key "%s" failed', $key);
+            \ManiaLib\Utils\Logger::error($message);
+        }
+    }
 
-	function replace($key, $value, $ttl=0)
-	{
-		$key = str_replace('\\', '/', $key);
-		if(!$this->memcached->replace($key, $value, $ttl))
-		{
-			$message = sprintf('Memcache::replace() with key "%s" failed', $key);
-			\ManiaLib\Utils\Logger::error($message);
-		}
-	}
+    function replace($key, $value, $ttl = 0)
+    {
+        $key = str_replace('\\', '/', $key);
+        if (!$this->memcached->replace($key, $value, $ttl)) {
+            $message = sprintf('Memcache::replace() with key "%s" failed', $key);
+            \ManiaLib\Utils\Logger::error($message);
+        }
+    }
 
-	function delete($key)
-	{
-		$key = str_replace('\\', '/', $key);
-		if(!$this->memcached->delete($key))
-		{
-			$message = sprintf('Memcache::delete() with key "%s" failed', $key);
-			\ManiaLib\Utils\Logger::error($message);
-		}
-	}
+    function delete($key)
+    {
+        $key = str_replace('\\', '/', $key);
+        if (!$this->memcached->delete($key)) {
+            $message = sprintf('Memcache::delete() with key "%s" failed', $key);
+            \ManiaLib\Utils\Logger::error($message);
+        }
+    }
 
-	function inc($key)
-	{
-		$key = str_replace('\\', '/', $key);
-		if(!$this->memcached->increment($key))
-		{
-			$message = sprintf('Memcache::increment() with key "%s" failed', $key);
-			\ManiaLib\Utils\Logger::error($message);
-		}
-	}
+    function inc($key)
+    {
+        $key = str_replace('\\', '/', $key);
+        if (!$this->memcached->increment($key)) {
+            $message = sprintf('Memcache::increment() with key "%s" failed', $key);
+            \ManiaLib\Utils\Logger::error($message);
+        }
+    }
 
 }
 
-?>

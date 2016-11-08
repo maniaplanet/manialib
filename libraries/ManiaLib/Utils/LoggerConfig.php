@@ -1,7 +1,7 @@
 <?php
 /**
  * ManiaLib - Lightweight PHP framework for Manialinks
- * 
+ *
  * @see         http://code.google.com/p/manialib/
  * @copyright   Copyright (c) 2009-2011 NADEO (http://www.nadeo.com)
  * @license     http://www.gnu.org/licenses/lgpl.html LGPL License 3
@@ -18,14 +18,13 @@ namespace ManiaLib\Utils;
 class LoggerConfig extends \ManiaLib\Utils\Singleton
 {
 
-	public $path;
-	public $prefix;
+    public $path;
+    public $prefix;
 
-	function __construct()
-	{
-		$this->path = MANIALIB_APP_PATH.'logs/';
-	}
+    function __construct()
+    {
+        $this->path = MANIALIB_APP_PATH . 'logs/';
+    }
 
 }
 
-?>

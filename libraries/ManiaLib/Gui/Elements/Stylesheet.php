@@ -11,24 +11,23 @@ namespace ManiaLib\Gui\Elements;
 
 class Stylesheet extends Frame
 {
-	protected $xmlTagName = 'stylesheet';
+    protected $xmlTagName = 'stylesheet';
 
-	/**
-	 * @var Frame3dStyles
-	 */
-	protected $frame3dStyle;
-	
-	function __construct()
-	{
-		parent::__construct(0, 0);
-		$this->frame3dStyle = new Frame3dStyles();
-		$this->children[] = $this->frame3dStyle;
-	}
+    /**
+     * @var Frame3dStyles
+     */
+    protected $frame3dStyle;
 
-	function add(Style3d $style)
-	{
-		$this->frame3dStyle->add($style);
-	}
+    function __construct()
+    {
+        parent::__construct(0, 0);
+        $this->frame3dStyle = new Frame3dStyles();
+        $this->children[] = $this->frame3dStyle;
+    }
+
+    function add(Style3d $style)
+    {
+        $this->frame3dStyle->add($style);
+    }
 }
 
-?>

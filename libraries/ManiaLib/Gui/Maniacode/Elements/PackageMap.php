@@ -18,13 +18,12 @@ namespace ManiaLib\Gui\Maniacode\Elements;
 class PackageMap extends FileDownload
 {
 
-	protected $xmlTagName = 'map';
+    protected $xmlTagName = 'map';
 
-	function __construct($name='', $url='')
-	{
-		parent::__construct($name, $url);
-	}
+    function __construct($name = '', $url = '')
+    {
+        parent::__construct($name, $url);
+    }
 
 }
 
-?>

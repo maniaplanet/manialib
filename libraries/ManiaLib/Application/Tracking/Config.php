@@ -15,9 +15,8 @@ namespace ManiaLib\Application\Tracking;
 class Config extends \ManiaLib\Utils\Singleton
 {
 
-	public $account; // eg UA-123456789-1
-	public $domainName; //eg 'example.com'
+    public $account; // eg UA-123456789-1
+    public $domainName; //eg 'example.com'
 
 }
 
-?>

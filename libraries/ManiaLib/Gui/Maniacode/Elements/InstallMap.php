@@ -15,13 +15,12 @@ namespace ManiaLib\Gui\Maniacode\Elements;
 class InstallMap extends \ManiaLib\Gui\Maniacode\Elements\FileDownload
 {
 
-	protected $xmlTagName = 'install_map';
+    protected $xmlTagName = 'install_map';
 
-	function __construct($name='', $url='')
-	{
-		parent::__construct($name, $url);
-	}
+    function __construct($name = '', $url = '')
+    {
+        parent::__construct($name, $url);
+    }
 
 }
 
-?>

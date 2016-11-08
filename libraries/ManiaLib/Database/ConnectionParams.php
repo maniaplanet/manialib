@@ -15,56 +15,55 @@ namespace ManiaLib\Database;
 class ConnectionParams
 {
 
-	/**
-	 * Human readeable identifier of the connection, to use with the factory.
-	 * For example "server01" so you can use Connection::factory("server01")
-	 * to retrieve a connection with the params from that object.
-	 * @var string
-	 */
-	public $id;
+    /**
+     * Human readeable identifier of the connection, to use with the factory.
+     * For example "server01" so you can use Connection::factory("server01")
+     * to retrieve a connection with the params from that object.
+     * @var string
+     */
+    public $id;
 
-	/**
-	 * Hostname
-	 * @var string
-	 */
-	public $host;
+    /**
+     * Hostname
+     * @var string
+     */
+    public $host;
 
-	/**
-	 * MySQL username
-	 * @var string
-	 */
-	public $user;
+    /**
+     * MySQL username
+     * @var string
+     */
+    public $user;
 
-	/**
-	 * MySQL password
-	 * @var string
-	 */
-	public $password;
+    /**
+     * MySQL password
+     * @var string
+     */
+    public $password;
 
-	/**
-	 * Default database to select
-	 * @var string
-	 */
-	public $database;
+    /**
+     * Default database to select
+     * @var string
+     */
+    public $database;
 
-	/**
-	 * Connection charset
-	 * @var string
-	 */
-	public $charset = 'utf8';
+    /**
+     * Connection charset
+     * @var string
+     */
+    public $charset = 'utf8';
 
-	/**
-	 * Whether to use an SSL connection
-	 * @var bool
-	 */
-	public $ssl = false;
-	
-	/**
-	 * Whether to use a persistant MySQL connection
-	 * @var bool
-	 */
-	public $persistent = false;
+    /**
+     * Whether to use an SSL connection
+     * @var bool
+     */
+    public $ssl = false;
+
+    /**
+     * Whether to use a persistant MySQL connection
+     * @var bool
+     */
+    public $persistent = false;
 
 }
 
-?>

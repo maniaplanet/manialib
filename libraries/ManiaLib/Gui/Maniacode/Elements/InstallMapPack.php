@@ -15,35 +15,32 @@ namespace ManiaLib\Gui\Maniacode\Elements;
 class InstallMapPack extends \ManiaLib\Gui\Maniacode\Component
 {
 
-	protected $xmlTagName = 'install_map_pack';
-	protected $maps = array();
+    protected $xmlTagName = 'install_map_pack';
+    protected $maps = array();
 
-	function __construct($name='')
-	{
-		$this->name = $name;
-	}
+    function __construct($name = '')
+    {
+        $this->name = $name;
+    }
 
-	function addMap($name = '', $url = '')
-	{
-		$this->maps[] = new \ManiaLib\Gui\Maniacode\Elements\PackageMap($name, $url);
-	}
+    function addMap($name = '', $url = '')
+    {
+        $this->maps[] = new \ManiaLib\Gui\Maniacode\Elements\PackageMap($name, $url);
+    }
 
-	function getLastInsert()
-	{
-		return end($this->maps);
-	}
+    function getLastInsert()
+    {
+        return end($this->maps);
+    }
 
-	protected function postFilter()
-	{
-		if(isset($this->maps) && is_array($this->maps) && count($this->maps))
-		{
-			foreach($this->maps as $map)
-			{
-				$map->save();
-			}
-		}
-	}
+    protected function postFilter()
+    {
+        if (isset($this->maps) && is_array($this->maps) && count($this->maps)) {
+            foreach ($this->maps as $map) {
+                $map->save();
+            }
+        }
+    }
 
 }
 
-?>

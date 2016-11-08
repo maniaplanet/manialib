@@ -1,7 +1,7 @@
 <?php
 /**
  * ManiaLib - Lightweight PHP framework for Manialinks
- * 
+ *
  * @see         http://code.google.com/p/manialib/
  * @copyright   Copyright (c) 2009-2011 NADEO (http://www.nadeo.com)
  * @license     http://www.gnu.org/licenses/lgpl.html LGPL License 3
@@ -14,9 +14,13 @@ namespace ManiaLib\Application\Rendering;
 
 interface RendererInterface
 {
-	static function exists($viewName);
-	static function render($viewName);
-	static function redirect($URL);
-	static function registerException(\Exception $e);
-	static function header();
+    static function exists($viewName);
+
+    static function render($viewName);
+
+    static function redirect($URL);
+
+    static function registerException(\Exception $e);
+
+    static function header();
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * ManiaLib - Lightweight PHP framework for Manialinks
- * 
+ *
  * @see         http://code.google.com/p/manialib/
  * @copyright   Copyright (c) 2009-2011 NADEO (http://www.nadeo.com)
  * @license     http://www.gnu.org/licenses/lgpl.html LGPL License 3
@@ -18,113 +18,103 @@ namespace ManiaLib\Cache\Drivers;
  */
 class Memcache implements \ManiaLib\Cache\CacheInterface
 {
-	/**
-	 * @var array[\ManiaLib\Database\ConnectionParams]
-	 */
-	static protected $connections = array();
+    /**
+     * @var array[\ManiaLib\Database\ConnectionParams]
+     */
+    static protected $connections = array();
 
-	/**
-	 * @var \Memcache
-	 */
-	protected $memcache;
-	
-	static function getInstance()
-	{
-		if(\array_key_exists('default', static::$connections))
-		{
-			return static::$connections['default'];
-		}
+    /**
+     * @var \Memcache
+     */
+    protected $memcache;
 
-		$config = MemcacheConfig::getInstance();
+    static function getInstance()
+    {
+        if (\array_key_exists('default', static::$connections)) {
+            return static::$connections['default'];
+        }
 
-		$params = new MemcacheConnectionParams();
-		$params->id = 'default';
-		$params->hosts = $config->hosts ? : array('127.0.0.1');
+        $config = MemcacheConfig::getInstance();
 
-		return static::factory($params);
-	}
-	
-	static function factory(MemcacheConnectionParams $params)
-	{
-		if(!$params->id)
-		{
-			throw new \Exception('MemcacheConnectionParams object has no ID');
-		}
-		if(!array_key_exists($params->id, static::$connections))
-		{
-			static::$connections[$params->id] = new static($params);
-		}
-		return static::$connections[$params->id];
-	}
+        $params = new MemcacheConnectionParams();
+        $params->id = 'default';
+        $params->hosts = $config->hosts ?: array('127.0.0.1');
 
-	protected function __construct(MemcacheConnectionParams $params)
-	{
-		if(!class_exists('Memcache'))
-		{
-			throw new Exception('PECL\Memcache extension not found');
-		}
-		$this->memcache = new \Memcache();
+        return static::factory($params);
+    }
 
-		foreach($params->hosts as $host)
-		{
-			$this->memcache->addServer($host);
-		}
-	}
+    static function factory(MemcacheConnectionParams $params)
+    {
+        if (!$params->id) {
+            throw new \Exception('MemcacheConnectionParams object has no ID');
+        }
+        if (!array_key_exists($params->id, static::$connections)) {
+            static::$connections[$params->id] = new static($params);
+        }
+        return static::$connections[$params->id];
+    }
 
-	/**
-	 * @deprecated
-	 */
-	function exists($key)
-	{
-		return!($this->fetch($key) === false);
-	}
+    protected function __construct(MemcacheConnectionParams $params)
+    {
+        if (!class_exists('Memcache')) {
+            throw new Exception('PECL\Memcache extension not found');
+        }
+        $this->memcache = new \Memcache();
 
-	function fetch($key)
-	{
-		$key = str_replace('\\', '/', $key);
-		return $this->memcache->get($key);
-	}
+        foreach ($params->hosts as $host) {
+            $this->memcache->addServer($host);
+        }
+    }
 
-	function add($key, $value, $ttl=0)
-	{
-		$key = str_replace('\\', '/', $key);
-		if(!$this->memcache->add($key, $value, false, $ttl))
-		{
-			$message = sprintf('Memcache::set() with key "%s" failed', $key);
-			\ManiaLib\Utils\Logger::error($message);
-		}
-	}
+    /**
+     * @deprecated
+     */
+    function exists($key)
+    {
+        return !($this->fetch($key) === false);
+    }
 
-	function replace($key, $value, $ttl=0)
-	{
-		$key = str_replace('\\', '/', $key);
-		if(!$this->memcache->replace($key, $value, false, $ttl))
-		{
-			$message = sprintf('Memcache::replace() with key "%s" failed', $key);
-			\ManiaLib\Utils\Logger::error($message);
-		}
-	}
+    function fetch($key)
+    {
+        $key = str_replace('\\', '/', $key);
+        return $this->memcache->get($key);
+    }
 
-	function delete($key)
-	{
-		$key = str_replace('\\', '/', $key);
-		if(!$this->memcache->delete($key, 0))
-		{
-			$message = sprintf('Memcache::delete() with key "%s" failed', $key);
-			\ManiaLib\Utils\Logger::error($message);
-		}
-	}
+    function add($key, $value, $ttl = 0)
+    {
+        $key = str_replace('\\', '/', $key);
+        if (!$this->memcache->add($key, $value, false, $ttl)) {
+            $message = sprintf('Memcache::set() with key "%s" failed', $key);
+            \ManiaLib\Utils\Logger::error($message);
+        }
+    }
 
-	function inc($key)
-	{
-		$key = str_replace('\\', '/', $key);
-		if(!$this->memcache->increment($key))
-		{
-			$message = sprintf('Memcache::increment() with key "%s" failed', $key);
-			\ManiaLib\Utils\Logger::error($message);
-		}
-	}
+    function replace($key, $value, $ttl = 0)
+    {
+        $key = str_replace('\\', '/', $key);
+        if (!$this->memcache->replace($key, $value, false, $ttl)) {
+            $message = sprintf('Memcache::replace() with key "%s" failed', $key);
+            \ManiaLib\Utils\Logger::error($message);
+        }
+    }
+
+    function delete($key)
+    {
+        $key = str_replace('\\', '/', $key);
+        if (!$this->memcache->delete($key, 0)) {
+            $message = sprintf('Memcache::delete() with key "%s" failed', $key);
+            \ManiaLib\Utils\Logger::error($message);
+        }
+    }
+
+    function inc($key)
+    {
+        $key = str_replace('\\', '/', $key);
+        if (!$this->memcache->increment($key)) {
+            $message = sprintf('Memcache::increment() with key "%s" failed', $key);
+            \ManiaLib\Utils\Logger::error($message);
+        }
+    }
 
 }
 
-?>

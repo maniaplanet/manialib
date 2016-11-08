@@ -19,38 +19,36 @@ namespace ManiaLib\Utils;
 abstract class UserAgent
 {
 
-	const CONTEXT_BROWSER = 'browser';
-	const CONTEXT_MENU = 'menu';
+    const CONTEXT_BROWSER = 'browser';
+    const CONTEXT_MENU = 'menu';
 
-	static function get()
-	{
-		return Arrays::get($_SERVER, 'HTTP_USER_AGENT');
-	}
+    static function get()
+    {
+        return Arrays::get($_SERVER, 'HTTP_USER_AGENT');
+    }
 
-	static function isManiaPlanet()
-	{
-		$userAgent = self::get();
-		$expectedAgent = 'ManiaPlanet';
-		$length = strlen($expectedAgent);
-		if(strlen($userAgent) < $length || substr($userAgent, 0, $length) != $expectedAgent)
-		{
-			return false;
-		}
-		return true;
-	}
+    static function isManiaPlanet()
+    {
+        $userAgent = self::get();
+        $expectedAgent = 'ManiaPlanet';
+        $length = strlen($expectedAgent);
+        if (strlen($userAgent) < $length || substr($userAgent, 0, $length) != $expectedAgent) {
+            return false;
+        }
+        return true;
+    }
 
-	static function getContext($default = self::CONTEXT_BROWSER)
-	{
-		preg_match('/context: ([[:alpha:]]+)/', self::get(), $matches);
-		return Arrays::get($matches, 1, $default);
-	}
+    static function getContext($default = self::CONTEXT_BROWSER)
+    {
+        preg_match('/context: ([[:alpha:]]+)/', self::get(), $matches);
+        return Arrays::get($matches, 1, $default);
+    }
 
-	static function getDistro()
-	{
-		preg_match('/distro: ([[:alpha:]]+)/', self::get(), $matches);
-		return Arrays::get($matches, 1, null);
-	}
+    static function getDistro()
+    {
+        preg_match('/distro: ([[:alpha:]]+)/', self::get(), $matches);
+        return Arrays::get($matches, 1, null);
+    }
 
 }
 
-?>

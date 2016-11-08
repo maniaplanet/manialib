@@ -11,7 +11,6 @@ namespace ManiaLib\Gui\Elements;
 
 class Frame3dStyles extends Frame
 {
-	protected $xmlTagName = 'frame3d';
+    protected $xmlTagName = 'frame3d';
 }
 
-?>

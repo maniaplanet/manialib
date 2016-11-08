@@ -15,35 +15,33 @@ namespace ManiaLib\Gui\Maniacode\Elements;
 class InviteBuddy extends \ManiaLib\Gui\Maniacode\Component
 {
 
-	protected $xmlTagName = 'invite_buddy';
-	protected $email;
+    protected $xmlTagName = 'invite_buddy';
+    protected $email;
 
-	function __construct($email = '')
-	{
-		$this->email = $email;
-	}
+    function __construct($email = '')
+    {
+        $this->email = $email;
+    }
 
-	function setEmail($email)
-	{
-		$this->email = $email;
-	}
+    function setEmail($email)
+    {
+        $this->email = $email;
+    }
 
-	function getEmail()
-	{
-		return $this->email;
-	}
+    function getEmail()
+    {
+        return $this->email;
+    }
 
-	protected function postFilter()
-	{
-		if(isset($this->email))
-		{
-			$elem = \ManiaLib\Gui\Maniacode\Maniacode::$domDocument->createElement('email');
-			$value = \ManiaLib\Gui\Maniacode\Maniacode::$domDocument->createTextNode($this->email);
-			$elem->appendChild($value);
-			$this->xml->appendChild($elem);
-		}
-	}
+    protected function postFilter()
+    {
+        if (isset($this->email)) {
+            $elem = \ManiaLib\Gui\Maniacode\Maniacode::$domDocument->createElement('email');
+            $value = \ManiaLib\Gui\Maniacode\Maniacode::$domDocument->createTextNode($this->email);
+            $elem->appendChild($value);
+            $this->xml->appendChild($elem);
+        }
+    }
 
 }
 
-?>
