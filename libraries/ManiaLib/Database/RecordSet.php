@@ -136,7 +136,7 @@ class RecordSet
      */
     function recordCount()
     {
-        return mysql_num_rows($this->result);
+        return mysqli_num_rows($this->result);
     }
 
 }
